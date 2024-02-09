@@ -1,0 +1,40 @@
+#!/bin/bash
+#=========================================
+#main script you use to run this system Admin
+#If you need anything, Just remember I am always here .
+#phone :01022108515
+#Linkedin :www.linkedin.com/in/ahmed-mohamed-9b88381b4
+#=========================================
+
+
+if [ $(id -u) -ne 0 ]
+ then
+     	whiptail --title "Privilege Error!!" --msgbox "Please enter as root user or user sudo Privilege." 8 78
+        exit
+fi
+
+# Check the Linux distribution
+if [ -x "$(command -v lsb_release)" ]; then
+    distro=$(lsb_release -si)
+
+    case "$distro" in
+        Ubuntu)
+            sudo apt-get install -y libnewt-dev &>/dev/null
+            sudo apt-get install -y xterm &>/dev/null
+            ;;
+	CentOS)
+            dnf -qy install newt &>/dev/null
+            dnf -qy install xterm-resize &>/dev/null
+ ;;
+        *)
+            exit 1
+            ;;
+    esac
+fi
+
+if (whiptail --title "System Admin " --yes --no "Start the Program?" 8 78); then
+       # ./projbash
+        exit
+else
+        whiptail --title " GoodBye :) " --msgbox ">>Created By/Ahmed Mohamed AbdAlFatah >>If you need anything, Just remember I am always here :) " 8 78
+fi
